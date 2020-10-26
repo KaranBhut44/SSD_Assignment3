@@ -81,8 +81,6 @@ def find_required_slot(l,s):
             return convert_24hr_to_12hr([(str(i[0])+"-"+str(i[0]+float(s)))])
     return "no slot available"
     
-    
-    
 with open("Employee1.txt","r") as file:
     e1=file.read()
 file.close()
@@ -103,7 +101,10 @@ list1 = list(E1[emp_name1].values())[0]
 list2 = list(E2[emp_name2].values())[0]
 
 if date1!=date2:
-    print("no slot available")
+    dummy_var = input()
+    file_op = open("output.txt","w")
+    file_op.write("no slot available")
+    file_op.close()
 else:
     updated_list1 , updated_list2 = [] , []
     for i in list1:
