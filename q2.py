@@ -2,8 +2,6 @@ month_number={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"s
 month_days = [31,28,31,30,31,30,31,31,30,31,30,31] 
 
 def make_list(a):
-    """arg is 1 date seperated by . or / or -
-    returns list of date,month,year"""
     l1=[]
     flag1=0
     if '-' in a:
@@ -54,9 +52,6 @@ def leap(m,y):
     return count
     
 def count(l):
-    """arg is list of both dates
-    internally called by fun(a,b) function
-    returns no of days"""
     date1,date2=l
     d1,m1,y1=date1
     d2,m2,y2=date2
@@ -65,8 +60,6 @@ def count(l):
     return abs(total_days_b4_date2 - total_days_b4_date1)
     
 def fun(a,b):
-    '''arg is 2 dates in any format
-    returns no. of days'''
     inp_list1,inp_list2=[],[]
     if any([ '.' in a , '/' in a , '-' in a]):
         inp_list1 = make_list(a)
