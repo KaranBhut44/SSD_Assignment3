@@ -11,31 +11,6 @@ def find_complement(l):
         l1.append(l[-1][1] + "-" + "17")
     return l1
 
-def convert_12hr_to_24hr(l):
-    updated_list=[]
-    for i in l:
-        start , end = i.split("-")
-        start , end = start.strip() , end.strip()
-        a , b = start.split(":")
-        if len(a)==1 and b[-2] == 'P':
-            a= int(a) + 12
-            start = str(a) + ":" + b
-        a , b = end.split(":")
-        if len(a)==1 and b[-2] == 'P':
-            a= int(a) + 12
-            end = str(a) + ":" + b
-        start , end = start[:-2] , end[:-2]
-        a , b = start.split(":")
-        if b != "00":
-            a = str( int(a) + 0.5 )
-        start = a
-        a , b = end.split(":")
-        if b != "00":
-            a = str( int(a) + 0.5 )
-        end = a
-        updated_list.append((start,end))    
-    return updated_list
-    
 def convert_24hr_to_12hr(l):
     l1=[]
     for slot in l:
@@ -97,7 +72,7 @@ def find_intersaction(l1,l2):
             if i[0]<j[1] and i[1]>j[0]:
                 a= max(i[0],j[0])
                 b= min(i[1],j[1])
-                l.append(""+str(a)+"-"+str(b))
+                l.append((a,b))
     return l
          
 def find_required_slot(l,s):
@@ -105,79 +80,94 @@ def find_required_slot(l,s):
         if i[1]-i[0] >= float(s):
             return convert_24hr_to_12hr([(str(i[0])+"-"+str(i[0]+float(s)))])
     return "no slot available"
+    
+with open("Employee1.txt","r") as file:
+    e1=file.read()
+file.close()
+with open("Employee2.txt","r") as file:
+    e2=file.read()
+file.close()
 
-import os
-files = [f for f in os.listdir('.') if os.path.isfile(f)]
-file_list=[]
-for i in files:
-    if i.endswith(".txt") and i.startswith("Employee"):
-        file_list.append(i)
-if "output.txt" in file_list:
-    file_list.remove("output.txt")
-                 
-e_list=[]
-for i in range(len(file_list)):
-    with open(file_list[i],"r") as file:
-        e_list.append(file.read())
-    file.close()
+E1 = ast.literal_eval(e1)
+E2 = ast.literal_eval(e2)
 
-E_list=[]
-for i in e_list:
-    E_list.append(ast.literal_eval(i))
+emp_name1 = list(E1.keys())[0]
+emp_name2 = list(E2.keys())[0]
 
-emp_name_list=[]
-for i in E_list:
-    emp_name_list.append(list(i.keys())[0])
+date1 = list(E1[emp_name1].keys())[0]
+date2 = list(E2[emp_name2].keys())[0]
 
-date_list=[]
-for i in range(len(emp_name_list)):
-    date_list.append(list(E_list[i][emp_name_list[i]].keys())[0])
+list1 = list(E1[emp_name1].values())[0]
+list2 = list(E2[emp_name2].values())[0]
 
-list_list=[]
-for i in range(len(emp_name_list)):
-    list_list.append(list(E_list[i][emp_name_list[i]].values())[0])   
-
-res = all(ele == date_list[0] for ele in date_list) 
-if not(res):
+if date1!=date2:
     dummy_var = input()
     file_op = open("output.txt","w")
     file_op.write("no slot available")
     file_op.close()
 else:
-    updated_list=[]
-    for i in list_list:
-        updated_list.append(convert_12hr_to_24hr(i))
-    l_list=[]
-    for i in updated_list:
-        l_list.append(find_complement(i))
+    updated_list1 , updated_list2 = [] , []
+    for i in list1:
+        start , end = i.split("-")
+        start , end = start.strip() , end.strip()
+        a , b = start.split(":")
+        if len(a)==1 and b[-2] == 'P':
+            a= int(a) + 12
+            start = str(a) + ":" + b
+        a , b = end.split(":")
+        if len(a)==1 and b[-2] == 'P':
+            a= int(a) + 12
+            end = str(a) + ":" + b
+        start , end = start[:-2] , end[:-2]
+        a , b = start.split(":")
+        if b != "00":
+            a = str( int(a) + 0.5 )
+        start = a
+        a , b = end.split(":")
+        if b != "00":
+            a = str( int(a) + 0.5 )
+        end = a
+        updated_list1.append((start,end))
     
-    show_list=[]
-    for i in l_list:
-        show_list.append(convert_24hr_to_12hr(i))
-
+    for i in list2:
+        start , end = i.split("-")
+        start , end = start.strip() , end.strip()
+        a , b = start.split(":")
+        if len(a)==1 and b[-2] == 'P':
+            a= int(a) + 12
+            start = str(a) + ":" + b
+        a , b = end.split(":")
+        if len(a)==1 and b[-2] == 'P':
+            a= int(a) + 12
+            end = str(a) + ":" + b
+        start , end = start[:-2] , end[:-2]
+        a , b = start.split(":")
+        if b != "00":
+            a = str( int(a) + 0.5 )
+        start = a
+        a , b = end.split(":")
+        if b != "00":
+            a = str( int(a) + 0.5 )
+        end = a
+        updated_list2.append((start,end))
+    
+    l1=find_complement(updated_list1)
+    show_l1=convert_24hr_to_12hr(l1)
+    l2=find_complement(updated_list2)
+    show_l2=convert_24hr_to_12hr(l2)
     slot=input()
-    temp=l_list[0]
-    for i in l_list:
-        temp=find_intersaction(temp,i)
-    available_slots=temp
-    new_list=[]
-    for i in available_slots:
-        a,b=i.split("-")
-        a,b=float(a),float(b)
-        new_list.append((a,b))
     
-    a=find_required_slot(new_list,slot)
-    line=""
-    for i in range(len(emp_name_list)):
-        line+=emp_name_list[i]+": "+str(show_list[i])+"\n"
-
+    available_slots = find_intersaction(l1,l2)
+    a=find_required_slot(available_slots,slot)
+    line1 = emp_name1+": "+str(show_l1)
+    line2 = emp_name2+": "+str(show_l2)
     sample=[]
     if type(a) == type(sample):
         d=dict()
-        d[date_list[0]] = a
+        d[date1] = a
         line3 = d
         file_op = open("output.txt","w")
-        file_op.write("Available slot\n"+line+"\n\nSlot Duration: "+slot+" hour\n"+str(line3))
+        file_op.write("Available slot\n"+line1+"\n"+line2+"\n\nSlot Duration: "+slot+" hour\n"+str(line3))
         file_op.close()
     else:
         file_op = open("output.txt","w")
