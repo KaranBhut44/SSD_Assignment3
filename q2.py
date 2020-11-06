@@ -1,4 +1,3 @@
-import sys
 month_number={"jan":1,"feb":2,"mar":3,"apr":4,"may":5,"jun":6,"jul":7,"aug":8,"sep":9,"oct":10,"nov":11,"dec":12}
 month_days = [31,28,31,30,31,30,31,31,30,31,30,31] 
 
@@ -74,31 +73,8 @@ def fun(a,b):
 
 file_ip = open("date_calculator.txt","r")
 l=file_ip.readlines()
-l[0] , l[1] = (l[0].split(':'))[1].lstrip() , (l[1].split(':'))[1].lstrip()
 file_ip.close()
 
-if (len(sys.argv) == 2) and (sys.argv[1][0]=='m'):
-    p_list=[]
-    if '.' in l[0]:
-        p_list=l[0].split('.')
-    elif '-' in l[0]:
-        p_list=l[0].split('-')
-    elif '/' in l[0]:
-        p_list=l[0].split('/')
-    l[0]=p_list[1]+"."+p_list[0]+"."+p_list[2]
-    
-    if '.' in l[1]:
-        p_list=l[1].split('.')
-    elif '-' in l[1]:
-        p_list=l[1].split('-')
-    elif '/' in l[1]:
-        p_list=l[1].split('/')
-    l[1]=p_list[1]+"."+p_list[0]+"."+p_list[2]
-
 file_op = open("output.txt","w")
-result=fun(l[0],l[1])
-if result==0 or result==1:
-    file_op.write("Date Difference: "+str(result)+" Day")
-else:
-    file_op.write("Date Difference: "+str(result)+" Days")
+file_op.write(str(fun(l[0],l[1])))
 file_op.close()
