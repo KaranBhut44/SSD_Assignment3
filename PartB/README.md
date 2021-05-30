@@ -1,3 +1,4 @@
+## Question file link: https://github.com/KaranBhut44/SSD_Assignment3/blob/main/PartA/Assignment3_PartB.pdf
 # q1.py
  - ##### Removed line-number 16 to 20 and added 16 to 25:
    - make list of employees from input and after removing 1st argument,(number of employees) stored it in `emp_list`.(because this code can handle any number of employees not just 3 to 5)
@@ -48,5 +49,3 @@
    - found available slot for all employees from `find_required_slot` function and stored it in required format.
  - ##### Removed line-167,170 and added line-175,178:
    - stored available slots for all employees and required slot in output.txt file.
-
-## Repository link: https://github.com/KaranBhut44/2020202015/tree/PartB
