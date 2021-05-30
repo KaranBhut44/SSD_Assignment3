@@ -1,3 +1,4 @@
+# Question file link: https://github.com/KaranBhut44/SSD_Assignment3/blob/main/PartA/Assignment3_PartA.pdf
 # q1
  - `find_parents(emp-id)` makes list(`l1`) of ancestors(leaders directly or indirectly (parent,grandparent,greategrandparent....etc leaders in the tree)) of that employee from the `org.json` file.
  - if we enter employee-id of organization's leader, it returns "Leader not found".
@@ -29,8 +30,3 @@
  - slot duration input is taken from user and stored it in `slot` variable. and it is passed to `find_required_slot` function along with `available_slots` list.
  - `find_required_slot` function returns list of selected slot matched with requirement(matched with given `slot` argument) if available.if not then it returns string "no slot available".
  - if `find_required_slot` function returns list then  `Available slots for both employees` and `selected slot and slot duration` is written to `output.txt` file, otherwise `no slot available` is written to the file. 
-
-
-
-
-## Link of github repository: https://github.com/KaranBhut44/2020202015.git
