@@ -1,3 +1,4 @@
+# Question file link: https://github.com/KaranBhut44/SSD_Assignment3/blob/main/PartC/Assignment3_PartC.pdf
 ### Removed code outside functions and added it to different functions for correctly identifying Cyclomatic complexity.(In all questions) 
 ### Achieved A grade in all questions, Attached `ComplexityScreenshot.png` below and also in the repository/folder. 
 ![](ComplexityScreenshot.png)
@@ -39,5 +40,3 @@
    - made new function `writer` to write desired output into file.
  - ##### Removed line-number 138 to 144 and added 168 to 177:
    - Optimized code and called `driver` function.
-
-## Repository link: https://github.com/KaranBhut44/2020202015/tree/PartC
